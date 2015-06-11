@@ -1,0 +1,34 @@
+package uk.ac.st_andrews.cs.cs4301.common;
+
+//This is a protocol buffer file, each block specifies a 
+// message types when compiled using protoc, this outputs
+// java code to handle these messages
+
+// https://developers.google.com/protocol-buffers/docs/javatutorial
+message BootstrapMessage {
+  required string address = 1;
+}
+
+message ResponseMessage {
+	required uint32 status = 1;
+}
+
+message ComputationMessage {
+	repeated uint32 values = 1;
+	required uint32 id = 2;
+	enum CalID {
+   		Product = 0;
+    		Max = 1;
+    		Min = 2;
+  	}
+	message CalType {
+    		optional CalID type = 1 [default = Product];
+  	}
+
+  	required CalType type = 3;
+}
+
+message ResultMessage{
+	required uint32 result = 1;
+	required uint32 id = 2;
+}
